@@ -32,12 +32,12 @@ virtualenv:
     test -e $BIN/pip-compile || $PIP install pip-tools
 
 
-# update requirements.prod.txt if requirement.prod.in has changed
+# update requirements.prod.txt if pyproject.toml has changed
 requirements-prod: virtualenv
     #!/usr/bin/env bash
     # exit if .in file is older than .txt file (-nt = 'newer than', but we negate with || to avoid error exit code)
-    test requirements.prod.in -nt requirements.prod.txt || exit 0
-    $COMPILE --output-file=requirements.prod.txt requirements.prod.in
+    test pyproject.toml -nt requirements.prod.txt || exit 0
+    $COMPILE --output-file=requirements.prod.txt pyproject.toml
 
 
 # update requirements.dev.txt if requirements.dev.in has changed

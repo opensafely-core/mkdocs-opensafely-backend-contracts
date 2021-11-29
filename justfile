@@ -23,7 +23,7 @@ clean:
 virtualenv:
     #!/usr/bin/env bash
     # allow users to specify python version in .env
-    PYTHON_VERSION=${PYTHON_VERSION:-python3.9}
+    PYTHON_VERSION=${PYTHON_VERSION:-python3.7}
 
     # create venv and upgrade pip
     test -d $VIRTUAL_ENV || { $PYTHON_VERSION -m venv $VIRTUAL_ENV && $PIP install --upgrade pip; }
@@ -89,7 +89,7 @@ upgrade env package="": virtualenv
 # *ARGS is variadic, 0 or more. This allows us to do `just test -k match`, for example.
 # Run the tests
 test *ARGS: devenv
-    $BIN/python -m pytest --cov=. --cov-report html --cov-report term-missing:skip-covered {{ ARGS }}
+    echo "todo"
 
 
 # runs the format (black), sort (isort) and lint (flake8) check but does not change any files
@@ -106,4 +106,4 @@ fix: devenv
 
 # Run the dev project
 run: devenv
-    echo "Not implemented yet"
+    echo "Not applicable here"

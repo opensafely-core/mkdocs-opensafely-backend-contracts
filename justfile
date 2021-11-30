@@ -89,7 +89,12 @@ upgrade env package="": virtualenv
 # *ARGS is variadic, 0 or more. This allows us to do `just test -k match`, for example.
 # Run the tests
 test *ARGS: devenv
-    echo "todo"
+    $BIN/python -m pytest \
+        --cov=contracts \
+        --cov=tests \
+        --cov-report=html \
+        --cov-report=term-missing:skip-covered \
+        {{ ARGS }}
 
 
 # runs the format (black), sort (isort) and lint (flake8) check but does not change any files

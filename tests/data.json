@@ -13,14 +13,14 @@
     {
       "name": "DummyClass",
       "dotted_path": "dummy_module.DummyClass",
-      "docstring": "Dummy docstring",
+      "docstring": ["Dummy docstring"],
       "columns": [],
       "backend_support": []
     },
     {
       "name": "DummyClass2",
       "dotted_path": "dummy_module2.DummyClass2",
-      "docstring": "Dummy docstring2",
+      "docstring": ["Dummy docstring2.", "", "Second line."],
       "columns": [],
       "backend_support": []
     }

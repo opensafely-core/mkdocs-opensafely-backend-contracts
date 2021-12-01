@@ -66,9 +66,11 @@ class BackendContractsPlugin(BasePlugin):
             if contract_data is None:
                 raise UnknownClassException(f"Unknown class: {match}")
 
+            docstring = "\n".join(contract_data["docstring"])
+
             output = contract_template.format(
                 name=contract_data["name"],
-                docstring=contract_data["docstring"],
+                docstring=docstring,
                 columns="",
                 backend_support="",
             ).strip()

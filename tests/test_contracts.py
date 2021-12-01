@@ -30,7 +30,9 @@ Dummy docstring
 
 ## DummyClass2
 
-Dummy docstring2
+Dummy docstring2.
+
+Second line.
 
 ## DummyBackend1
 

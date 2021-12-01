@@ -1,4 +1,5 @@
 import json
+import os
 import pathlib
 import re
 
@@ -18,7 +19,7 @@ template = """
 {backend_support}
 """
 
-DATA_FILE = "public_docs.json"
+DATA_FILE = os.environ.get("BACKEND_DOCS_FILE", "public_docs.json")
 
 
 class UnknownClassException(Exception):
@@ -29,7 +30,7 @@ class BackendContractsPlugin(BasePlugin):
     def on_page_markdown(self, markdown, page, config, files, **kwargs):
         path = pathlib.Path(DATA_FILE)
         if not path.exists():
-            raise FileNotFoundError("Expected backends data file in root directory")
+            raise FileNotFoundError(f"Expected to find {DATA_FILE} in root directory")
 
         # load all data from JSON file
         with path.open() as f:

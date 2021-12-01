@@ -7,10 +7,16 @@ from first import first
 from mkdocs.plugins import BasePlugin
 
 
-class_path_pat = re.compile(r"\n[\s]*!!!\s(.*)\n")
+backends_pat = re.compile(r"\n[\s]*!!!\sbackend:(.*)\n")
+contracts_pat = re.compile(r"\n[\s]*!!!\scontract:(.*)\n")
 
-template = """
-# {name}
+backend_template = """
+## {name}
+
+{contracts}
+"""
+contract_template = """
+## {name}
 
 {docstring}
 
@@ -36,20 +42,37 @@ class BackendContractsPlugin(BasePlugin):
         with path.open() as f:
             data = json.load(f)
 
-        # find each matching `!!! dotted.path.Class` string in the markdown
-        for match in class_path_pat.findall(markdown):
-            # get class details from data file
-            class_data = first(data, key=lambda c: c["dotted_path"] == match)
-            if class_data is None:
+        for match in backends_pat.findall(markdown):
+            # get backend details from data file
+            backend_data = first(data["backends"], key=lambda c: c["name"] == match)
+            if backend_data is None:
                 raise UnknownClassException(f"Unknown class: {match}")
 
-            output = template.format(
-                name=class_data["name"],
-                docstring=class_data["docstring"],
+            contracts = ", ".join(f"`{c}`" for c in backend_data["tables"])
+
+            output = backend_template.format(
+                name=backend_data["name"],
+                contracts=contracts,
+            ).strip()
+
+            markdown = markdown.replace(f"!!! backend:{match}", output)
+
+        # find each matching `!!! dotted.path.Class` string in the markdown
+        for match in contracts_pat.findall(markdown):
+            # get contract details from data file
+            contract_data = first(
+                data["contracts"], key=lambda c: c["dotted_path"] == match
+            )
+            if contract_data is None:
+                raise UnknownClassException(f"Unknown class: {match}")
+
+            output = contract_template.format(
+                name=contract_data["name"],
+                docstring=contract_data["docstring"],
                 columns="",
                 backend_support="",
-            )
+            ).strip()
 
-            markdown = markdown.replace(f"!!! {match}", output)
+            markdown = markdown.replace(f"!!! contract:{match}", output)
 
         return markdown

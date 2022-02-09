@@ -9,7 +9,7 @@
 # reaons for these requirements, but we live in a world where pip has a
 # resolver now so we're pinning flake8 to 3.x until they lift their upper bound
 # on importlib-metadata.
-flake8<4
+flake8<5
 
 black
 flake8-builtins

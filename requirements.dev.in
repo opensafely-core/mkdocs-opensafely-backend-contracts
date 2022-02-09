@@ -7,7 +7,7 @@
 # flake8>=4 requires importlib-metadata<4.3 on python3.8 or lower.
 # Markdown>=3.3.5 requires importlib-metadata>=4.4.  Both projects have their
 # reaons for these requirements, but we live in a world where pip has a
-# resolver now so we're pinning flake8 to 3.x until they life their upper bound
+# resolver now so we're pinning flake8 to 3.x until they lift their upper bound
 # on importlib-metadata.
 flake8<4
 

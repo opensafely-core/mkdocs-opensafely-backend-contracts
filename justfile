@@ -78,7 +78,7 @@ install-precommit:
     test -f $BASE_DIR/.git/hooks/pre-commit || $BIN/pre-commit install
 
 
-# upgrade dev or prod dependencies (all by default, specify package to upgrade single package)
+# upgrade dev or prod dependencies (specify package to upgrade single package, all by default)
 upgrade env package="": virtualenv
     #!/usr/bin/env bash
     opts="--upgrade"

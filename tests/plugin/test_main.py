@@ -29,19 +29,27 @@ def test_multiple_paths_to_change(monkeypatch):
 
 Dummy docstring
 
+| Column name | Description | Type | Constraints |
+| ----------- | ----------- | ---- | ----------- |
+| patient_id | a column description | PseudoPatientId | Must have a value, must be unique. |
+
 ## DummyClass2
 
 Dummy docstring2.
 
 Second line.
 
-## DummyBackend1
+| Column name | Description | Type | Constraints |
+| ----------- | ----------- | ---- | ----------- |
 
-`DummyClass`, `DummyClass2`
+Tables implemented:
 
-## DummyBackend2
+* [`DummyClass`](contracts-reference.md#dummyclass)
+* [`DummyClass2`](contracts-reference.md#dummyclass2)
 
-`DummyClass`
+Tables implemented:
+
+* [`DummyClass`](contracts-reference.md#dummyclass)
     """
 
     assert output == expected
@@ -75,9 +83,14 @@ def test_one_path_to_change(monkeypatch):
 
 Dummy docstring
 
-## DummyBackend1
+| Column name | Description | Type | Constraints |
+| ----------- | ----------- | ---- | ----------- |
+| patient_id | a column description | PseudoPatientId | Must have a value, must be unique. |
 
-`DummyClass`, `DummyClass2`
+Tables implemented:
+
+* [`DummyClass`](contracts-reference.md#dummyclass)
+* [`DummyClass2`](contracts-reference.md#dummyclass2)
     """
 
     assert output == expected

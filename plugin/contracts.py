@@ -8,6 +8,8 @@ contract_template = """
 
 {docstring}
 
+| Column name | Description | Type | Constraints |
+| ----------- | ----------- | ---- | ----------- |
 {columns}
 
 
@@ -22,10 +24,14 @@ def render_contract(data, match):
         raise UnknownClassException(f"Unknown class: {match}")
 
     docstring = "\n".join(contract_data["docstring"])
+    columns = "\n".join(
+        f"| {c['name']} | {c['description']} | {c['type']} | {', '.join(c['constraints']).capitalize()}. |"
+        for c in contract_data["columns"]
+    )
 
     return contract_template.format(
         name=contract_data["name"],
         docstring=docstring,
-        columns="",
+        columns=columns,
         backend_support="",
     ).strip()

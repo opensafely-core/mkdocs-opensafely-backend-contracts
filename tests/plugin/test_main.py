@@ -37,11 +37,14 @@ Second line.
 
 ## DummyBackend1
 
-`DummyClass`, `DummyClass2`
+Tables implemented:
 
-## DummyBackend2
+* `DummyClass`
+* `DummyClass2`
 
-`DummyClass`
+Tables implemented:
+
+* `DummyClass`
     """
 
     assert output == expected
@@ -77,7 +80,10 @@ Dummy docstring
 
 ## DummyBackend1
 
-`DummyClass`, `DummyClass2`
+Tables implemented:
+
+* `DummyClass`
+* `DummyClass2`
     """
 
     assert output == expected

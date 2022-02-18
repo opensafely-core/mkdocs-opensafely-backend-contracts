@@ -44,12 +44,12 @@ Second line.
 
 Tables implemented:
 
-* `DummyClass`
-* `DummyClass2`
+* [`DummyClass`](contracts-reference.md#dummyclass)
+* [`DummyClass2`](contracts-reference.md#dummyclass2)
 
 Tables implemented:
 
-* `DummyClass`
+* [`DummyClass`](contracts-reference.md#dummyclass)
     """
 
     assert output == expected
@@ -89,8 +89,8 @@ Dummy docstring
 
 Tables implemented:
 
-* `DummyClass`
-* `DummyClass2`
+* [`DummyClass`](contracts-reference.md#dummyclass)
+* [`DummyClass2`](contracts-reference.md#dummyclass2)
     """
 
     assert output == expected

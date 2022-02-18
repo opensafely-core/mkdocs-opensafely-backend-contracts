@@ -29,13 +29,18 @@ def test_multiple_paths_to_change(monkeypatch):
 
 Dummy docstring
 
+| Column name | Description | Type | Constraints |
+| ----------- | ----------- | ---- | ----------- |
+| patient_id | a column description | PseudoPatientId | Must have a value, Must be unique. |
+
 ## DummyClass2
 
 Dummy docstring2.
 
 Second line.
 
-## DummyBackend1
+| Column name | Description | Type | Constraints |
+| ----------- | ----------- | ---- | ----------- |
 
 Tables implemented:
 
@@ -78,7 +83,9 @@ def test_one_path_to_change(monkeypatch):
 
 Dummy docstring
 
-## DummyBackend1
+| Column name | Description | Type | Constraints |
+| ----------- | ----------- | ---- | ----------- |
+| patient_id | a column description | PseudoPatientId | Must have a value, Must be unique. |
 
 Tables implemented:
 

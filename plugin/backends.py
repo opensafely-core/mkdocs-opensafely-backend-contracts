@@ -4,7 +4,6 @@ from .exceptions import UnknownClassException
 
 
 backend_template = """
-## {name}
 Tables implemented:
 
 {contracts}

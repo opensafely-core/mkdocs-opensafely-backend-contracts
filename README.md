@@ -1,4 +1,4 @@
-# mkdocs-opensafely-backend-contracts
+# mkdocs-opensafely-databuilder
 
 This is a [MkDocs](https://www.mkdocs.org/) plugin for rendering the OpenSAFELY Backend Contracts.
 

@@ -1,11 +1,12 @@
 import pytest
 
-import contracts
-from contracts import BackendContractsPlugin, UnknownClassException
+import plugin
+from plugin.exceptions import UnknownClassException
+from plugin.main import DataBuilderPlugin
 
 
 def test_multiple_paths_to_change(monkeypatch):
-    monkeypatch.setattr(contracts, "DATA_FILE", "tests/data.json")
+    monkeypatch.setattr(plugin.main, "DATA_FILE", "tests/data.json")
 
     markdown = """
 # this is a page title
@@ -19,7 +20,7 @@ def test_multiple_paths_to_change(monkeypatch):
 !!! backend:DummyBackend2
     """
 
-    output = BackendContractsPlugin().on_page_markdown(markdown, None, None, None)
+    output = DataBuilderPlugin().on_page_markdown(markdown, None, None, None)
 
     expected = """
 # this is a page title
@@ -47,15 +48,15 @@ Second line.
 
 
 def test_no_paths_to_change(monkeypatch):
-    monkeypatch.setattr(contracts, "DATA_FILE", "tests/data.json")
+    monkeypatch.setattr(plugin.main, "DATA_FILE", "tests/data.json")
 
-    output = BackendContractsPlugin().on_page_markdown("", None, None, None)
+    output = DataBuilderPlugin().on_page_markdown("", None, None, None)
 
     assert output == ""
 
 
 def test_one_path_to_change(monkeypatch):
-    monkeypatch.setattr(contracts, "DATA_FILE", "tests/data.json")
+    monkeypatch.setattr(plugin.main, "DATA_FILE", "tests/data.json")
 
     markdown = """
 # this is a page title
@@ -65,7 +66,7 @@ def test_one_path_to_change(monkeypatch):
 !!! backend:DummyBackend1
     """
 
-    output = BackendContractsPlugin().on_page_markdown(markdown, None, None, None)
+    output = DataBuilderPlugin().on_page_markdown(markdown, None, None, None)
 
     expected = """
 # this is a page title
@@ -83,21 +84,21 @@ Dummy docstring
 
 
 def test_no_data_file(monkeypatch):
-    monkeypatch.setattr(contracts, "DATA_FILE", "tests/non-existent-data.json")
+    monkeypatch.setattr(plugin.main, "DATA_FILE", "tests/non-existent-data.json")
 
     with pytest.raises(FileNotFoundError):
-        BackendContractsPlugin().on_page_markdown("", None, None, None)
+        DataBuilderPlugin().on_page_markdown("", None, None, None)
 
 
 def test_unknown_class(monkeypatch):
-    monkeypatch.setattr(contracts, "DATA_FILE", "tests/data.json")
+    monkeypatch.setattr(plugin.main, "DATA_FILE", "tests/data.json")
 
     with pytest.raises(UnknownClassException):
-        BackendContractsPlugin().on_page_markdown(
+        DataBuilderPlugin().on_page_markdown(
             "\n!!! backend:UnknownBackend\n", None, None, None
         )
 
     with pytest.raises(UnknownClassException):
-        BackendContractsPlugin().on_page_markdown(
+        DataBuilderPlugin().on_page_markdown(
             "\n!!! contract:unknown_module.UnknownClass\n", None, None, None
         )

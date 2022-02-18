@@ -31,7 +31,7 @@ Dummy docstring
 
 | Column name | Description | Type | Constraints |
 | ----------- | ----------- | ---- | ----------- |
-| patient_id | a column description | PseudoPatientId | Must have a value, Must be unique. |
+| patient_id | a column description | PseudoPatientId | Must have a value, must be unique. |
 
 ## DummyClass2
 
@@ -85,7 +85,7 @@ Dummy docstring
 
 | Column name | Description | Type | Constraints |
 | ----------- | ----------- | ---- | ----------- |
-| patient_id | a column description | PseudoPatientId | Must have a value, Must be unique. |
+| patient_id | a column description | PseudoPatientId | Must have a value, must be unique. |
 
 Tables implemented:
 

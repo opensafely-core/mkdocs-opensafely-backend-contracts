@@ -25,7 +25,7 @@ def render_contract(data, match):
 
     docstring = "\n".join(contract_data["docstring"])
     columns = "\n".join(
-        f"| {c['name']} | {c['description']} | {c['type']} | {', '.join(c['constraints'])}. |"
+        f"| {c['name']} | {c['description']} | {c['type']} | {', '.join(c['constraints']).capitalize()}. |"
         for c in contract_data["columns"]
     )
 

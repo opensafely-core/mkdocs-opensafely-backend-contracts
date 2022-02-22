@@ -6,11 +6,10 @@ import re
 from mkdocs.plugins import BasePlugin
 
 from .backends import render_backend
-from .contracts import render_contract
+from .contracts import render_contracts
 
 
 backends_pat = re.compile(r"\n[\s]*!!!\sbackend:(.*)\n")
-contracts_pat = re.compile(r"\n[\s]*!!!\scontract:(.*)\n")
 
 DATA_FILE = os.environ.get("BACKEND_DOCS_FILE", "public_docs.json")
 
@@ -50,9 +49,9 @@ class DataBuilderPlugin(BasePlugin):
             backend = render_backend(data, match)
             markdown = markdown.replace(f"!!! backend:{match}", backend)
 
-        # find each matching `!!! dotted.path.Class` string in the markdown
-        for match in contracts_pat.findall(markdown):
-            contract = render_contract(data, match)
-            markdown = markdown.replace(f"!!! contract:{match}", contract)
+        # replace the contracts marker if it exists
+        if "!!! contracts" in markdown:
+            contracts = render_contracts(data["contracts"])
+            markdown = markdown.replace("!!! contracts", contracts)
 
         return markdown

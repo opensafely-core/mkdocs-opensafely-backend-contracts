@@ -2,16 +2,17 @@
   "backends": [
     {
       "name": "DummyBackend1",
-      "tables": ["DummyClass", "DummyClass2"]
+      "contracts": ["Some/Path/DummyClass", "Some/Path/DummyClass2"]
     },
     {
       "name": "DummyBackend2",
-      "tables": ["DummyClass"]
+      "contracts": ["some/path/DummyClass"]
     }
   ],
   "contracts": [
     {
       "name": "DummyClass",
+      "hierarchy": ["some", "path"],
       "dotted_path": "dummy_module.DummyClass",
       "docstring": ["Dummy docstring"],
       "columns": [{
@@ -27,6 +28,7 @@
     },
     {
       "name": "DummyClass2",
+      "hierarchy": ["some", "path"],
       "dotted_path": "dummy_module2.DummyClass2",
       "docstring": ["Dummy docstring2.", "", "Second line."],
       "columns": [],

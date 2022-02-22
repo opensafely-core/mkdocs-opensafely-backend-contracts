@@ -4,7 +4,7 @@ from .exceptions import UnknownClassException
 
 
 backend_template = """
-Tables implemented:
+Contracts implemented:
 
 {contracts}
 """
@@ -16,9 +16,11 @@ def render_backend(data, match):
     if backend_data is None:
         raise UnknownClassException(f"Unknown class: {match}")
 
+    contracts = [
+        (c, c.lower().replace("/", "")) for c in sorted(backend_data["contracts"])
+    ]
     contracts = "\n".join(
-        f"* [`{c}`](contracts-reference.md#{c.lower()})"
-        for c in sorted(backend_data["tables"])
+        f"* [`{name}`](contracts-reference.md#{link})" for name, link in contracts
     )
 
     return backend_template.format(

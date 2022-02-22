@@ -1,8 +1,3 @@
-from first import first
-
-from .exceptions import UnknownClassException
-
-
 contract_template = """
 ## {name}
 
@@ -14,24 +9,29 @@ contract_template = """
 
 
 {backend_support}
+
 """
 
 
-def render_contract(data, match):
-    # get contract details from data file
-    contract_data = first(data["contracts"], key=lambda c: c["dotted_path"] == match)
-    if contract_data is None:
-        raise UnknownClassException(f"Unknown class: {match}")
+def render_contracts(contracts_data):
+    outputs = []
 
-    docstring = "\n".join(contract_data["docstring"])
-    columns = "\n".join(
-        f"| {c['name']} | {c['description']} | {c['type']} | {', '.join(c['constraints']).capitalize()}. |"
-        for c in contract_data["columns"]
-    )
+    for contract in contracts_data:
+        hierarchy = [h.title() for h in contract["hierarchy"]]
+        name = "/".join([*hierarchy, contract["name"]])
+        docstring = "\n".join(contract["docstring"])
+        columns = "\n".join(
+            f"| {c['name']} | {c['description']} | {c['type']} | {', '.join(c['constraints']).capitalize()}. |"
+            for c in contract["columns"]
+        )
 
-    return contract_template.format(
-        name=contract_data["name"],
-        docstring=docstring,
-        columns=columns,
-        backend_support="",
-    ).strip()
+        output = contract_template.format(
+            name=name,
+            docstring=docstring,
+            columns=columns,
+            backend_support="",
+        )
+
+        outputs.append(output)
+
+    return "\n".join(outputs)

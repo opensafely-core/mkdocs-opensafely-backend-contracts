@@ -29,6 +29,8 @@ def test_success(monkeypatch):
 !!! contracts
 
 !!! backend:DummyBackend1
+
+!!! specs
     """
 
     output = DataBuilderPlugin().on_page_markdown(markdown, None, None, None)
@@ -69,6 +71,33 @@ Contracts implemented:
 
 * [`Some/Path/DummyClass`](contracts-reference.md#somepathdummyclass)
 * [`Some/Path/DummyClass2`](contracts-reference.md#somepathdummyclass2)
+
+
+## 1 Filtering an event frame
+
+
+### 1.1 Including rows
+
+
+#### 1.1.1 Take with column
+
+This example makes use of an event-level table named `e` containing the following data:
+
+| |i1|b1 |
+| - | - | - |
+| 1|101|T |
+| 2|201|T |
+| 2|203|F |
+| 3|302|F |
+
+`e.take(e.b1).i1.sum_for_patient()` returns the following patient series:
+
+| patient | value |
+| - | - |
+| 1|203 |
+| 2|201 |
+| 3| |
+
     """
 
     assert output == expected

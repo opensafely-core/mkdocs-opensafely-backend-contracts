@@ -90,8 +90,7 @@ upgrade env package="": virtualenv
 # Run the tests
 test *ARGS: devenv
     $BIN/python -m pytest \
-        --cov=contracts \
-        --cov=tests \
+        --cov=. \
         --cov-report=html \
         --cov-report=term-missing:skip-covered \
         {{ ARGS }}

@@ -7,6 +7,7 @@ from mkdocs.plugins import BasePlugin
 
 from .backends import render_backend
 from .contracts import render_contracts
+from .specs import render_specs
 
 
 backends_pat = re.compile(r"\n[\s]*!!!\sbackend:(.*)\n")
@@ -53,5 +54,10 @@ class DataBuilderPlugin(BasePlugin):
         if "!!! contracts" in markdown:
             contracts = render_contracts(data["contracts"])
             markdown = markdown.replace("!!! contracts", contracts)
+
+        # replace the specs marker if it exists
+        if "!!! specs" in markdown:
+            specs = render_specs(data["specs"])
+            markdown = markdown.replace("!!! specs", specs)
 
         return markdown

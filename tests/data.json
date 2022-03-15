@@ -34,5 +34,67 @@
       "columns": [],
       "backend_support": []
     }
+  ],
+  "specs": [
+    {
+      "id": "1",
+      "title": "Filtering an event frame",
+      "sections": [
+        {
+          "id": "1.1",
+          "title": "Including rows",
+          "paragraphs": [
+            {
+              "id": "1.1.1",
+              "title": "Take with column",
+              "tables": {
+                "e": [
+                  [
+                    "",
+                    "i1",
+                    "b1"
+                  ],
+                  [
+                    "1",
+                    "101",
+                    "T"
+                  ],
+                  [
+                    "2",
+                    "201",
+                    "T"
+                  ],
+                  [
+                    "2",
+                    "203",
+                    "F"
+                  ],
+                  [
+                    "3",
+                    "302",
+                    "F"
+                  ]
+                ]
+              },
+              "series": "e.take(e.b1).i1.sum_for_patient()",
+              "output": [
+                [
+                  "1",
+                  "203"
+                ],
+                [
+                  "2",
+                  "201"
+                ],
+                [
+                  "3",
+                  ""
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

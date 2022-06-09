@@ -1,0 +1,95 @@
+{
+    "backends": [{
+            "name": "DummyBackend1",
+            "contracts": ["Some/Path/DummyClass", "Some/Path/DummyClass2"]
+        },
+        {
+            "name": "DummyBackend2",
+            "contracts": ["some/path/DummyClass"]
+        }
+    ],
+    "contracts": [{
+            "name": "DummyClass",
+            "hierarchy": ["some", "path"],
+            "dotted_path": "dummy_module.DummyClass",
+            "docstring": ["Dummy docstring"],
+            "columns": [{
+                "name": "patient_id",
+                "description": "a column description",
+                "type": "PseudoPatientId",
+                "constraints": [
+                    "Must have a value",
+                    "Must be unique"
+                ]
+            }],
+            "backend_support": []
+        },
+        {
+            "name": "DummyClass2",
+            "hierarchy": ["some", "path"],
+            "dotted_path": "dummy_module2.DummyClass2",
+            "docstring": ["Dummy docstring2.", "", "Second line."],
+            "columns": [],
+            "backend_support": []
+        }
+    ],
+    "specs": [{
+        "id": "1",
+        "title": "Filtering an event frame",
+        "text": "Chapters may have additional descriptive text blocks",
+        "sections": [{
+            "id": "1.1",
+            "title": "Including rows",
+            "text": "Additional text can also be added at a section level",
+            "paragraphs": [{
+                "id": "1.1.1",
+                "title": "Take with column",
+                "text": "Further additional text can be provided for a paragraph",
+                "tables": {
+                    "e": [
+                        [
+                            "",
+                            "i1",
+                            "b1"
+                        ],
+                        [
+                            "1",
+                            "101",
+                            "T"
+                        ],
+                        [
+                            "2",
+                            "201",
+                            "T"
+                        ],
+                        [
+                            "2",
+                            "203",
+                            "F"
+                        ],
+                        [
+                            "3",
+                            "302",
+                            "F"
+                        ]
+                    ]
+                },
+                "series": "e.take(e.b1).i1.sum_for_patient()",
+                "output": [
+                    [
+                        "1",
+                        "203"
+                    ],
+                    [
+                        "2",
+                        "201"
+                    ],
+                    [
+                        "3",
+                        ""
+                    ]
+                ]
+            }]
+        }]
+    }]
+}

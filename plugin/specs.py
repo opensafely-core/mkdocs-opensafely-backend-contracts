@@ -8,8 +8,8 @@ section_template = """
 
 
 paragraph_template = """
-#### {id} {title}
-{text}
+#### {id} {title}{text}
+
 This example makes use of {intro} containing the following data:
 
 {input_tables}

@@ -1,0 +1,107 @@
+{
+  "backends": [
+    {
+      "name": "DummyBackend1",
+      "contracts": ["Some/Path/DummyClass", "Some/Path/DummyClass2"]
+    },
+    {
+      "name": "DummyBackend2",
+      "contracts": ["some/path/DummyClass"]
+    }
+  ],
+  "contracts": [
+    {
+      "name": "DummyClass",
+      "hierarchy": ["some", "path"],
+      "dotted_path": "dummy_module.DummyClass",
+      "docstring": ["Dummy docstring"],
+      "columns": [{
+        "name": "patient_id",
+        "description": "a column description",
+        "type": "PseudoPatientId",
+        "constraints": [
+          "Must have a value",
+          "Must be unique"
+        ]
+      }],
+      "backend_support": []
+    },
+    {
+      "name": "DummyClass2",
+      "hierarchy": ["some", "path"],
+      "dotted_path": "dummy_module2.DummyClass2",
+      "docstring": ["Dummy docstring2.", "", "Second line."],
+      "columns": [],
+      "backend_support": []
+    }
+  ],
+  "specs": [
+    {
+      "id": "1",
+      "title": "Logical case expressions",
+      "sections": [
+        {
+          "id": "1.1",
+          "title": "Logical case expressions",
+          "paragraphs": [
+            {
+              "id": "1.1.1",
+              "title": "Case with expression",
+              "tables": {
+                "p": [
+                  [
+                    "patient",
+                    "i1"
+                  ],
+                  [
+                    "1",
+                    "6"
+                  ],
+                  [
+                    "2",
+                    "7"
+                  ],
+                  [
+                    "3",
+                    "8"
+                  ],
+                  [
+                    "4",
+                    "9"
+                  ],
+                  [
+                    "5",
+                    ""
+                  ]
+                ]
+              },
+              "series": "case(\n    when(p.i1 < 8).then(p.i1),\n    when(p.i1 > 8).then(100),\n)",
+              "output": [
+                [
+                  "1",
+                  "6"
+                ],
+                [
+                  "2",
+                  "7"
+                ],
+                [
+                  "3",
+                  ""
+                ],
+                [
+                  "4",
+                  "100"
+                ],
+                [
+                  "5",
+                  ""
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

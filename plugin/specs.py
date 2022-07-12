@@ -14,7 +14,10 @@ This example makes use of {intro} containing the following data:
 
 {input_tables}
 
-`{series}` returns the following patient series:
+```
+{series}
+```
+returns the following patient series:
 
 | patient | value |
 | - | - |

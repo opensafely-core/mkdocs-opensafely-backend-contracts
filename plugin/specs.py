@@ -12,8 +12,7 @@ paragraph_template = """
 
 This example makes use of {intro} containing the following data:
 
-{input_tables}
-{codelists}
+{input_tables}{codelists}
 
 ```
 {series}
@@ -83,7 +82,7 @@ def render_specs(specs_data):
                 output_rows = "\n".join(build_rows(paragraph["output"]))
                 add_descriptive_text(paragraph)
                 codelists = ""
-                if paragraph["codelists"]:
+                if "codelists" in paragraph and paragraph["codelists"]:
                     for codelist in paragraph["codelists"]:
                         codelists += codelists_template.format(
                             system=codelist["system"],

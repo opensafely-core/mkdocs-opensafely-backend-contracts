@@ -290,6 +290,96 @@ returns the following patient series:
     assert output == expected
 
 
+def test_success_with_codelist(monkeypatch):
+    monkeypatch.setattr(plugin.main, "DATA_FILE", "tests/data_with_codelist.json")
+
+    markdown = """
+# this is a page title
+
+!!! contracts
+
+!!! backend:DummyBackend1
+
+!!! specs
+    """
+
+    output = DataBuilderPlugin().on_page_markdown(markdown, None, None, None)
+
+    expected = """
+# this is a page title
+
+
+## Some/Path/DummyClass
+
+Dummy docstring
+
+| Column name | Description | Type | Constraints |
+| ----------- | ----------- | ---- | ----------- |
+| patient_id | a column description | PseudoPatientId | Must have a value, must be unique. |
+
+
+
+
+
+
+## Some/Path/DummyClass2
+
+Dummy docstring2.
+
+Second line.
+
+| Column name | Description | Type | Constraints |
+| ----------- | ----------- | ---- | ----------- |
+
+
+
+
+
+
+
+Contracts implemented:
+
+* [`Some/Path/DummyClass`](contracts-reference.md#somepathdummyclass)
+* [`Some/Path/DummyClass2`](contracts-reference.md#somepathdummyclass2)
+
+
+## 1 Operations on all series containing codes
+
+
+### 1.1 Testing for containment using codes
+
+
+#### 1.1.1 Is in
+
+This example makes use of a patient-level table named `p` containing the following data:
+
+| patient|c1 |
+| - | - |
+| 1|abc |
+| 2|def |
+| 3|ghi |
+| 4| |
+
+and the following SNOMED CT codelist containing the following codes: ghi, abc
+
+
+```
+p.c1.is_in(codelist)
+```
+returns the following patient series:
+
+| patient | value |
+| - | - |
+| 1|T |
+| 2|F |
+| 3|T |
+| 4| |
+
+    """
+
+    assert output == expected
+
+
 def test_unknown_class(monkeypatch):
     monkeypatch.setattr(plugin.main, "DATA_FILE", "tests/data.json")
 

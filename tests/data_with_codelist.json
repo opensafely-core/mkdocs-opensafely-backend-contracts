@@ -1,0 +1,108 @@
+{
+    "backends": [
+      {
+        "name": "DummyBackend1",
+        "contracts": ["Some/Path/DummyClass", "Some/Path/DummyClass2"]
+      },
+      {
+        "name": "DummyBackend2",
+        "contracts": ["some/path/DummyClass"]
+      }
+    ],
+    "contracts": [
+      {
+        "name": "DummyClass",
+        "hierarchy": ["some", "path"],
+        "dotted_path": "dummy_module.DummyClass",
+        "docstring": ["Dummy docstring"],
+        "columns": [{
+          "name": "patient_id",
+          "description": "a column description",
+          "type": "PseudoPatientId",
+          "constraints": [
+            "Must have a value",
+            "Must be unique"
+          ]
+        }],
+        "backend_support": []
+      },
+      {
+        "name": "DummyClass2",
+        "hierarchy": ["some", "path"],
+        "dotted_path": "dummy_module2.DummyClass2",
+        "docstring": ["Dummy docstring2.", "", "Second line."],
+        "columns": [],
+        "backend_support": []
+      }
+    ],
+    "specs": [
+      {
+        "id": "1",
+        "title": "Operations on all series containing codes",
+        "sections": [
+          {
+            "id": "1.1",
+            "title": "Testing for containment using codes",
+            "paragraphs": [
+              {
+                "id": "1.1.1",
+                "title": "Is in",
+                "tables": {
+                    "p": [
+                      [
+                        "patient",
+                        "c1"
+                      ],
+                      [
+                        "1",
+                        "abc"
+                      ],
+                      [
+                        "2",
+                        "def"
+                      ],
+                      [
+                        "3",
+                        "ghi"
+                      ],
+                      [
+                        "4",
+                        ""
+                      ]
+                    ]
+                  },
+                  "series": "p.c1.is_in(codelist)",
+                  "output": [
+                    [
+                      "1",
+                      "T"
+                    ],
+                    [
+                      "2",
+                      "F"
+                    ],
+                    [
+                      "3",
+                      "T"
+                    ],
+                    [
+                      "4",
+                      ""
+                    ]
+                  ],
+                  "codelists": [
+                    {
+                      "system": "SNOMED CT",
+                      "codes": [
+                        "ghi",
+                        "abc"
+                      ]
+                    }
+                  ]
+                }
+            ]
+          }
+        ]
+      }
+    ]
+  }

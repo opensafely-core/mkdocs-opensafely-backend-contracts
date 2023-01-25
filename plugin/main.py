@@ -12,7 +12,7 @@ from .specs import render_specs
 
 backends_pat = re.compile(r"\n[\s]*!!!\sbackend:(.*)\n")
 
-DATA_FILE = os.environ.get("BACKEND_DOCS_FILE", "public_docs.json")
+DATA_FILE = os.environ.get("BACKEND_DOCS_FILE", "docs/public_docs.json")
 
 
 class DataBuilderPlugin(BasePlugin):
